@@ -3,23 +3,31 @@ from PyQt5.uic import loadUi
 from detection_window import DetectionWindow
 
 class SettingsWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, token):
         super(SettingsWindow, self).__init__()
         loadUi('UI/settings_window.ui',self)
 
+        self.token = token
         self.detection_window = DetectionWindow()
         self.pushButton.clicked.connect(self.go_to_detection)
+
+        self.popup = QMessageBox()
+        self.popup.setWindowTitle("Failed")
+        self.popup.setText("Fields must not be empty.")
 
     def displayInfo(self):
         self.show()
 
     def go_to_detection(self):
         # print("Go to Detection")
-        if self.detection_window.isVisible():
-            print("Detection window is already open")
+        if self.location_input.text() == '' or self.sendTo_input.text() == '':
+            self.popup.exec_()
         else:
-            self.detection_window.create_detection_instance()
-            self.detection_window.start_detection()
+            if self.detection_window.isVisible():
+                print('Detection window is already open!')
+            else:
+                self.detection_window.create_detection_instance(self.token, self.location_input.text(), self.sendTo_input.text())
+                self.detection_window.start_detection()
 
     def closeEvent(self, event):
         if self.detection_window.isVisible():

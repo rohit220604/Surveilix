@@ -91,7 +91,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="Sendto_input">
+   <widget class="QLineEdit" name="sendTo_input">
     <property name="geometry">
      <rect>
       <x>30</x>

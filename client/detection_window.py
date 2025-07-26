@@ -10,8 +10,8 @@ class DetectionWindow(QMainWindow):
         loadUi('UI/detection_window.ui',self)
         self.stop_detection_button.clicked.connect(self.close)
 
-    def create_detection_instance(self):
-        self.detection = Detection()
+    def create_detection_instance(self,token, location, receiver):
+        self.detection = Detection(token, location, receiver)
 
     @pyqtSlot(QImage)
     def setImage(self,image):

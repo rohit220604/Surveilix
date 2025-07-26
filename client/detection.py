@@ -3,11 +3,14 @@ from PyQt5.QtGui import QImage
 import cv2
 import numpy as np
 import time
+import requests
 
 class Detection(QThread):
-    def __init__(self):
+    def __init__(self,token, location, receiver):
         super(Detection,self).__init__()
-
+        self.token = token
+        self.location = location
+        self.receiver = receiver
     changePixmap = pyqtSignal(QImage)
 
     def run(self):
@@ -47,7 +50,7 @@ class Detection(QThread):
                         class_id = np.argmax(scores)
                         confidence = scores[class_id]
 
-                        if confidence > 0.97:
+                        if confidence > 0.98:
                             center_x = int(detection[0]*width)
                             center_y = int(detection[1]*height)
                             w = int(detection[2]*width)
@@ -86,3 +89,19 @@ class Detection(QThread):
     def save_detection(self,frame):
         cv2.imwrite("saved_frame/frame.jpg", frame)
         print("Frame Saved")
+        self.post_detection()
+
+    def post_detection(self):
+        try:
+            url = 'http://127.0.0.1:8000/api/images/'
+            headers = {'Authorization':'Token'+self.token}
+            files = {'image':open('saved_frame/frame.jpg','rb')}
+            data = {'user_ID': self.token,'location': self.location, 'alert_receiver': self.receiver}
+            response = requests.post(url, files=files, headers=headers, data=data)
+
+            if response.ok:
+                print('Alert was sent to the server')
+            else:
+                print('Unable to send alert to the server')
+        except:
+            print("Unable to access server")
