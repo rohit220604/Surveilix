@@ -1,4 +1,4 @@
-client/modelFiles
-server/static/images
-server/db.sqlite3
+.env
+db.sqlite3
+.DB_Store
 C:\Users\LENOVO\Desktop\codes\Projects\Surveilix\server\db.sqlite3
