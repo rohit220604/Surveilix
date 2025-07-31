@@ -53,8 +53,8 @@ def send_sms(serializer):
 
 def prepare_alert_message(serializer):
     image_data = split(serializer.data['image'], ".")
-    uuid = image_data[0]
-    url = 'http://127.0.0.1:8000/alert' + uuid
+    uuid = split(image_data[3],'/')
+    url = 'http://127.0.0.1:8000/alert' + uuid[2]
 
     return 'Weapon Detected! View alert at ' + url
 
