@@ -14,7 +14,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://surveilix.onrender.com']
+ALLOWED_HOSTS = ['surveilix.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
