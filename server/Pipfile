@@ -30,16 +30,15 @@ pylint = "==2.6.0"
 pyparsing = "==2.4.7"
 python-dateutil = "==2.8.1"
 pytz = "==2020.5"
-requests = "==2.25.1"
 s3transfer = "==0.3.3"
 six = "==1.15.0"
 sqlparse = "==0.4.1"
 toml = "==0.10.2"
-twilio = "==6.50.1"
 urllib3 = "==1.26.2"
 whitenoise = "==5.2.0"
 wrapt = "==1.12.1"
 python-dotenv = "*"
+requests = "*"
 
 [dev-packages]
 
